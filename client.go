@@ -44,11 +44,20 @@ func parseJsonResponse(resp *http.Response, result interface{}) error {
 		return err
 	}
 	if bytes.Contains(body, []byte("errorCode")) {
-		result := ErrorResult{}
-		if err := json.Unmarshal(body, &result); err != nil {
+		r := ErrorResult{}
+		if err := json.Unmarshal(body, &r); err != nil {
 			return err
 		}
-		return errors.New(result.ErrorMessage)
+		return errors.New(r.ErrorMessage)
+	} else if bytes.Contains(body, []byte("\"error\"")) {
+		r := map[string]interface{}{}
+		if err := json.Unmarshal(body, &r); err != nil {
+			return err
+		}
+		if val, ok := r["error"]; ok {
+			return errors.New(val.(string))
+		}
+		return errors.New("Unknown error response: " + string(body))
 	}
 	return json.Unmarshal(body, result)
 }
