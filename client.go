@@ -93,7 +93,7 @@ Valid params:
 	pageSize: (int)
 */
 func (self *Client) GetFitnessActivityFeed(userParams *Params) (*FitnessActivityFeed, error) {
-	params = self.GetRequestParams(userParams)
+	params := self.GetRequestParams(userParams)
 	req, err := self.createBaseRequest("GET", "/fitnessActivities?"+params.Encode(), ContentTypeFitnessActivityFeed, nil)
 	if err != nil {
 		return nil, err
@@ -109,4 +109,24 @@ func (self *Client) GetFitnessActivityFeed(userParams *Params) (*FitnessActivity
 		return nil, err
 	}
 	return &activities, nil
+}
+
+func (self *Client) GetFitnessActivity(activity FitnessActivity, userParams *Params) (*FitnessActivity, error) {
+	params := self.GetRequestParams(userParams)
+	req, err := self.createBaseRequest("GET", activity.Uri+"?"+params.Encode(), ContentTypeFitnessActivity, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := self.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	// re-fill the details
+	if err := parseJsonResponse(resp, &activity); err != nil {
+		return nil, err
+	}
+	return &activity, nil
 }

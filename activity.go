@@ -73,21 +73,49 @@ type FitnessActivityFeed struct {
 type FitnessActivity struct {
 	Type          string    `json:"type"`
 	StartTime     time.Time `json:"start_time"`
-	TotalDistance int64     `json:"total_distance"`
-	Duration      int64     `json:"duration"`
+	TotalDistance float64   `json:"total_distance"`
+	Duration      float64   `json:"duration"`
 	Source        string    `json:"source"`
 	HasMap        string    `json:"has_map"`
 	HasPath       string    `json:"has_path"`
 	EntryMode     string    `json:"entry_mode"`
 	Uri           string    `json:"uri"`
 
-	HeartRate []int `json:"heart_rate"`
+	// Details
+	Climb         float64 `json:"climb"`
+	Comment       string  `json:"comments"`       // "comments" : "/fitnessActivities/318671963/comments",
+	UserID        int64   `json:"userID"`         // "userID" : 24207205,
+	IsLive        bool    `json:"is_live"`        // "is_live" : false,
+	Equipment     string  `json:"equipment"`      // "equipment" : "None",
+	TotalCalories int64   `json:"total_calories"` // "total_calories" : 22,
 
-	Client
+	Share    string `json:"share"`     // "share" : "Everyone",
+	ShareMap string `json:"share_map"` // "share_map" : "Friends",
+
+	Distance []Distance `json:"distance"` // "distance" : [ { "distance" : 0, "timestamp" : 0 }, ... ]
+	Path     []Path     `json:"path"`
 }
 
-func (self *FitnessActivity) GetDetail() {
+type Distance struct {
+	Distance  float64 `json:"distance"`  // "distance" : 0,
+	Timestamp float64 `json:"timestamp"` // : 0
+}
 
+/*
+   {
+      "altitude" : 37,
+      "longitude" : 121.371254,
+      "type" : "gps",
+      "timestamp" : 3.629,
+      "latitude" : 24.942796
+   },
+*/
+type Path struct {
+	Altitude  float64 `json:"altitude"`
+	Longitude float64 `json:"longitude"` // 121.37
+	Type      string  `json:"type"`      // gps
+	Latitude  float64 `json:"latitude"`
+	Timestamp int64   `json:"timestamp"`
 }
 
 /*
