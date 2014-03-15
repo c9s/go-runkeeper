@@ -1,6 +1,7 @@
 package main
 
 import runkeeper "github.com/c9s/go-runkeeper"
+import "github.com/davecgh/go-spew/spew"
 import "log"
 import "flag"
 
@@ -14,7 +15,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println(activities)
+	spew.Dump(activities)
+
 	for _, activity := range activities.Items {
 		log.Printf("%#v\n", activity)
 
@@ -22,6 +24,6 @@ func main() {
 		if err != nil {
 			log.Println(err)
 		}
-		log.Println(activityDetails)
+		spew.Dump(activityDetails)
 	}
 }
