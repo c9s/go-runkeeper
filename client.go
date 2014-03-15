@@ -13,6 +13,27 @@ import (
 	"strings"
 )
 
+const (
+	ContentTypeBackgroundActivity       = "application/vnd.com.runkeeper.BackgroundActivity+json"
+	ContentTypeBackgroundActivitySet    = "application/vnd.com.runkeeper.BackgroundActivitySet+json"
+	ContentTypeComment                  = "application/vnd.com.runkeeper.Comment+json"
+	ContentTypeDiabetesMeasurementSet   = "application/vnd.com.runkeeper.DiabetesMeasurementSet+json"
+	ContentTypeFitnessActivity          = "application/vnd.com.runkeeper.FitnessActivity+json"
+	ContentTypeFitnessActivityFeed      = "application/vnd.com.runkeeper.FitnessActivityFeed+json"
+	ContentTypeGeneralMeasurementSet    = "application/vnd.com.runkeeper.GeneralMeasurementSet+json"
+	ContentTypeNutritionSet             = "application/vnd.com.runkeeper.NutritionSet+json"
+	ContentTypeProfile                  = "application/vnd.com.runkeeper.Profile+json"
+	ContentTypeSleepSet                 = "application/vnd.com.runkeeper.SleepSet+json"
+	ContentTypeStrengthTrainingActivity = "application/vnd.com.runkeeper.StrengthTrainingActivity+json"
+	ContentTypeUser                     = "application/vnd.com.runkeeper.User+json"
+	ContentTypeWeightSet                = "application/vnd.com.runkeeper.WeightSet+json"
+)
+const (
+	ContentTypeNewSleep = "application/vnd.com.runkeeper.NewSleep+json"
+)
+
+const baseUrl = "https://api.runkeeper.com"
+
 type Client struct {
 	AccessToken string
 	CookieJar   *cookiejar.Jar
@@ -27,14 +48,6 @@ func NewClient(accessToken string) *Client {
 	return &Client{accessToken, jar, &http.Client{Jar: jar}}
 }
 
-var baseUrl string = "https://api.nike.com"
-
-type ErrorResult struct {
-	Result       string `json:"result"`
-	ErrorCode    string `json:"errorCode"`
-	ErrorMessage string `json:"errorMessage"`
-}
-
 /**
 result should be a struct pointer
 */
@@ -43,23 +56,17 @@ func parseJsonResponse(resp *http.Response, result interface{}) error {
 	if err != nil {
 		return err
 	}
-	if bytes.Contains(body, []byte("errorCode")) {
-		r := ErrorResult{}
-		if err := json.Unmarshal(body, &r); err != nil {
-			return err
-		}
-		return errors.New(r.ErrorMessage)
-	} else if bytes.Contains(body, []byte("\"error\"")) {
-		r := map[string]interface{}{}
-		if err := json.Unmarshal(body, &r); err != nil {
-			return err
-		}
-		if val, ok := r["error"]; ok {
-			return errors.New(val.(string))
-		}
-		return errors.New("Unknown error response: " + string(body))
-	}
 	return json.Unmarshal(body, result)
+}
+
+func (self *Client) createBaseRequest(method string, url string, acceptContentType string) (*http.Request, error) {
+	req, err := http.NewRequest(method, baseUrl+url, nil)
+	req.Header.Add("Accept", acceptContentType)
+	req.Header.Add("Authorization", "Bearer "+self.AccessToken)
+	if err != nil {
+		return nil, err
+	}
+	return req, nil
 }
 
 /*

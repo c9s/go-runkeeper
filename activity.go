@@ -5,64 +5,82 @@ import "fmt"
 import "strconv"
 
 /*
-Activity Response struct
+{
+	"size": 40,
+	"items": [
+		{
+			"type": "Running",
+			"start_time": "Tue, 1 Mar 2011 07:00:00",
+			"total_distance": 70,
+			"duration": 10,
+			"source": "RunKeeper",
+			"entry_mode": "API",
+			"has_map": "true",
+			"uri": "/activities/40"
+		},
+		{
+		"type": "Running",
+		"start_time": "Thu, 3 Mar 2011 07:00:00",
+		"total_distance": 70,
+		"duration": 10,
+		"source": "RunKeeper",
+		"entry_mode": "Web",
+		"has_map": "true",
+		"uri": "/activities/39"
+		},
+		{
+		"type": "Running",
+		"startTime": "Sat, 5 Mar 2011 11:00:00",
+		"total_distance": 70,
+		"duration": 10,
+		"source": "RunKeeper",
+		"entry_mode": "API",
+		"has_map": "true",
+		"uri": "/activities/38"
+		},
+		{
+		"type": "Running",
+		"startTime": "Mon, 7 Mar 2011 07:00:00",
+		"total_distance": 70,
+		"duration": 10,
+		"source": "RunKeeper",
+		"entry_mode": "API",
+		"has_map": "false",
+		"uri": "/activities/37"
+		},
+		⋮
+	],
+	"previous": "https://api.runkeeper.com/user/1234567890/activities?page=2"
+}
 */
-type Activities struct {
-	Data   []Activity `json:"data"`
-	Paging Paging     `json:"paging"`
-	Error  string     `json:"error"`
-}
 
-type Paging struct {
-	Next string `json:"next"`
-	Prev string `json:"prev"`
-}
-
-func (self *Activities) GetNextPage() string {
-	return self.Paging.Next
-}
-
-func (self *Activities) GetPrevPage() string {
-	return self.Paging.Prev
+type FitnessActivities struct {
+	Size     int64             `json:"size"`
+	Items    []FitnessActivity `json:"items"`
+	Previous string            `json:"previous"`
 }
 
 /*
 	{
-      "activityId": "263c1cde-552f-4c65-a943-7214691ec81e",
-      "activityType": "ALL_DAY",
-      "startTime": "2014-03-09T16:00:00Z",
-      "activityTimeZone": "Asia/Taipei",
-      "status": "IN_PROGRESS",
-      "deviceType": "FUELBAND2",
-      "metricSummary": {
-        "calories": 47,
-        "fuel": 180,
-        "distance": 0.7881873846054077,
-        "steps": 1001,
-        "duration": "0:56:00.000"
-      },
-      "tags": [],
-      "metrics": []
+		"type": "Running",
+		"start_time": "Tue, 1 Mar 2011 07:00:00",
+		"total_distance": 70,
+		"duration": 10,
+		"source": "RunKeeper",
+		"entry_mode": "API",
+		"has_map": "true",
+		"uri": "/activities/40"
 	}
 */
-type Activity struct {
-	Id            string        `json:"activityId"`
-	Type          string        `json:"activityType"`
-	StartTime     time.Time     `json:"startTime"`
-	TimeZone      TimeZone      `json:"activityTimeZone"`
-	Status        string        `json:"status"`
-	DeviceType    string        `json:"deviceType"`
-	MetricSummary MetricSummary `json:"metricSummary"`
-	Tags          []Tag         `json:"tags"`
-	Metrics       []Metric      `json:"metrics"`
+type FitnessActivity struct {
+	Type          string    `json:"type"`
+	StartTime     time.Time `json:"start_time"`
+	TotalDistance int64     `json:"total_distance"`
+	Duration      int64     `json:"duration"`
+	Source        string    `json:"source"`
 }
 
-func (self *Activity) Location() time.Location {
-	return time.Location(self.TimeZone)
-}
-
-type TimeZone time.Location
-
+/*
 func (self *TimeZone) UnmarshalJSON(data []byte) (err error) {
 	// Fractional seconds are handled implicitly by Parse.
 	loc, err := time.LoadLocation(string(data[1 : len(data)-1]))
@@ -74,36 +92,9 @@ func (self *TimeZone) UnmarshalJSON(data []byte) (err error) {
 	}
 	return nil
 }
-
-type Tag struct {
-	Type  string `json:"tagType"`
-	Value string `json:"tagValue"`
-}
+*/
 
 /*
-   "calories": 173,
-   "fuel": 655,
-   "distance": 0,
-   "steps": 595,
-   "duration": "0:00:00.000"
-*/
-type MetricSummary struct {
-	Calories int64    `json:"calories"`
-	Fuel     int64    `json:"fuel"`
-	Distance float64  `json:"distance"`
-	Steps    int64    `json:"steps"`
-	Duration Duration `json:"duration"`
-}
-
-type Metric struct {
-	IntervalMetric int           `json:"intervalMetric"` // 1 by default
-	IntervalUnit   string        `json:"intervalUnit"`   // "MIN",
-	Type           string        `json:"metricType"`     // "metricType": "STARS", "CALORIES", "STEPS", "FUEL"
-	Values         []MetricValue `json:"values"`         // "values": [ "1","2","3","4" , .... ]
-}
-
-type MetricValue int64
-
 func (self *MetricValue) UnmarshalJSON(data []byte) error {
 	if data[0] == '"' {
 		var val int64
@@ -120,14 +111,9 @@ func (self *MetricValue) UnmarshalJSON(data []byte) error {
 	}
 	return nil
 }
-
-/**
-http://www.ostyn.com/standards/scorm/samples/ISOTimeForSCORM.htm
-http://support.sas.com/documentation/cdl/en/lrdict/64316/HTML/default/viewer.htm#a003169814.htm
-format: hh:mm:ss.ffffff
 */
+/*
 type Duration float64
-
 func ParseDurationInSeconds(duration string) (Duration, error) {
 	var hours, minutes int
 	var seconds float64
@@ -136,15 +122,14 @@ func ParseDurationInSeconds(duration string) (Duration, error) {
 	}
 	return Duration(float64(hours)*60*60 + float64(minutes)*60 + seconds), nil
 }
-
 func (self *Duration) UnmarshalText(data []byte) (err error) {
 	// Fractional seconds are handled implicitly by Parse.
 	*self, err = ParseDurationInSeconds(string(data))
 	return err
 }
-
 func (self *Duration) UnmarshalJSON(data []byte) (err error) {
 	// Fractional seconds are handled implicitly by Parse.
 	*self, err = ParseDurationInSeconds(string(data))
 	return err
 }
+*/
