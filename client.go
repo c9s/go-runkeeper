@@ -1,4 +1,4 @@
-package nikeplus
+package runkeeper
 
 import (
 	"bytes"

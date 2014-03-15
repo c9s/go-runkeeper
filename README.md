@@ -2,8 +2,8 @@ Nike+ API for Go
 ----------------
 
 ```go
-import nikeplus "github.com/c9s/go-nikeplus"
-client := nikeplus.NewClient("{accessToken}")  // pass access token if you have one. if you don't, just pass an empty string
+import runkeeper "github.com/c9s/go-runkeeper"
+client := runkeeper.NewClient("{accessToken}")  // pass access token if you have one. if you don't, just pass an empty string
 
 log.Println("Logining...")
 client.Login("email", "password")
@@ -20,7 +20,7 @@ for _, activity := range *activities.Data {
     log.Println(activityDetails)
 }
 
-activities , err := client.GetActivities(nikeplus.Params{ "count": "10" })
+activities , err := client.GetActivities(runkeeper.Params{ "count": "10" })
 for _, activity := range *activities.Data {
     activityDetails := client.GetActivityDetails(activity.Id)
     log.Println(activityDetails)
