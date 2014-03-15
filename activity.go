@@ -1,8 +1,6 @@
 package runkeeper
 
 import "time"
-import "fmt"
-import "strconv"
 
 /*
 {
@@ -54,7 +52,7 @@ import "strconv"
 }
 */
 
-type FitnessActivities struct {
+type FitnessActivityFeed struct {
 	Size     int64             `json:"size"`
 	Items    []FitnessActivity `json:"items"`
 	Previous string            `json:"previous"`
@@ -78,6 +76,18 @@ type FitnessActivity struct {
 	TotalDistance int64     `json:"total_distance"`
 	Duration      int64     `json:"duration"`
 	Source        string    `json:"source"`
+	HasMap        string    `json:"has_map"`
+	HasPath       string    `json:"has_path"`
+	EntryMode     string    `json:"entry_mode"`
+	Uri           string    `json:"uri"`
+
+	HeartRate []int `json:"heart_rate"`
+
+	Client
+}
+
+func (self *FitnessActivity) GetDetail() {
+
 }
 
 /*

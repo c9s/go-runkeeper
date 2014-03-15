@@ -1,0 +1,375 @@
+{
+   "distance" : [
+      {
+         "distance" : 0,
+         "timestamp" : 0
+      },
+      {
+         "distance" : 6.5636800924348,
+         "timestamp" : 3.629
+      },
+      {
+         "distance" : 18.0157270705509,
+         "timestamp" : 9.736
+      },
+      {
+         "timestamp" : 12.621,
+         "distance" : 28.6263630094877
+      },
+      {
+         "timestamp" : 14.588,
+         "distance" : 40.131156281298
+      },
+      {
+         "timestamp" : 17.768,
+         "distance" : 50.8591982703784
+      },
+      {
+         "distance" : 62.3866911304857,
+         "timestamp" : 21.531
+      },
+      {
+         "timestamp" : 24.546,
+         "distance" : 72.5428356172269
+      },
+      {
+         "distance" : 83.9503805888691,
+         "timestamp" : 28.574
+      },
+      {
+         "timestamp" : 36.813,
+         "distance" : 95.3407056070018
+      },
+      {
+         "distance" : 105.753047875956,
+         "timestamp" : 40.814
+      },
+      {
+         "distance" : 117.760998746543,
+         "timestamp" : 45.735
+      },
+      {
+         "timestamp" : 51.699,
+         "distance" : 129.149525468626
+      },
+      {
+         "timestamp" : 55.6,
+         "distance" : 139.746830209302
+      },
+      {
+         "timestamp" : 59.633,
+         "distance" : 151.908404786777
+      },
+      {
+         "distance" : 164.134672591304,
+         "timestamp" : 63.817
+      },
+      {
+         "distance" : 174.758450940598,
+         "timestamp" : 71.816
+      },
+      {
+         "timestamp" : 75.603,
+         "distance" : 186.550720319368
+      },
+      {
+         "timestamp" : 80.58,
+         "distance" : 199.349832338803
+      },
+      {
+         "distance" : 210.329954810941,
+         "timestamp" : 84.607
+      },
+      {
+         "distance" : 220.959990675811,
+         "timestamp" : 88.545
+      },
+      {
+         "distance" : 231.67337992856,
+         "timestamp" : 94.584
+      },
+      {
+         "distance" : 243.36413399107,
+         "timestamp" : 99.616
+      },
+      {
+         "distance" : 253.61527102593,
+         "timestamp" : 104.651
+      },
+      {
+         "distance" : 264.658302207648,
+         "timestamp" : 109.71
+      },
+      {
+         "timestamp" : 114.648,
+         "distance" : 275.566916283572
+      },
+      {
+         "distance" : 287.596978058497,
+         "timestamp" : 118.835
+      },
+      {
+         "timestamp" : 122.563,
+         "distance" : 299.005036067013
+      },
+      {
+         "timestamp" : 123.774,
+         "distance" : 300.574770974922
+      },
+      {
+         "distance" : 300.574770974922,
+         "timestamp" : 213.247
+      },
+      {
+         "distance" : 300.574770974922,
+         "timestamp" : 213.247
+      }
+   ],
+   "start_time" : "Sat, 15 Mar 2014 21:33:16",
+   "path" : [
+      {
+         "altitude" : 37,
+         "longitude" : 121.371316,
+         "type" : "start",
+         "timestamp" : 0,
+         "latitude" : 24.942814
+      },
+      {
+         "altitude" : 37,
+         "longitude" : 121.371254,
+         "type" : "gps",
+         "timestamp" : 3.629,
+         "latitude" : 24.942796
+      },
+      {
+         "latitude" : 24.942722,
+         "type" : "gps",
+         "timestamp" : 9.736,
+         "longitude" : 121.371175,
+         "altitude" : 37
+      },
+      {
+         "latitude" : 24.942667,
+         "longitude" : 121.371089,
+         "type" : "gps",
+         "timestamp" : 12.621,
+         "altitude" : 37
+      },
+      {
+         "timestamp" : 14.588,
+         "type" : "gps",
+         "longitude" : 121.370991,
+         "latitude" : 24.942614,
+         "altitude" : 37
+      },
+      {
+         "latitude" : 24.942564,
+         "timestamp" : 17.768,
+         "type" : "gps",
+         "longitude" : 121.3709,
+         "altitude" : 36.9090909090909
+      },
+      {
+         "latitude" : 24.942519,
+         "timestamp" : 21.531,
+         "type" : "gps",
+         "longitude" : 121.370797,
+         "altitude" : 36.8181818181818
+      },
+      {
+         "timestamp" : 24.546,
+         "type" : "gps",
+         "longitude" : 121.370731,
+         "latitude" : 24.94245,
+         "altitude" : 36.7272727272727
+      },
+      {
+         "longitude" : 121.370655,
+         "type" : "gps",
+         "timestamp" : 28.574,
+         "latitude" : 24.942374,
+         "altitude" : 36.3636363636364
+      },
+      {
+         "altitude" : 36,
+         "longitude" : 121.370559,
+         "timestamp" : 36.813,
+         "type" : "gps",
+         "latitude" : 24.94232
+      },
+      {
+         "altitude" : 35.6363636363636,
+         "longitude" : 121.370488,
+         "timestamp" : 40.814,
+         "type" : "gps",
+         "latitude" : 24.942252
+      },
+      {
+         "latitude" : 24.942172,
+         "timestamp" : 45.735,
+         "type" : "gps",
+         "longitude" : 121.370408,
+         "altitude" : 35.2727272727273
+      },
+      {
+         "timestamp" : 51.699,
+         "type" : "gps",
+         "longitude" : 121.3703,
+         "latitude" : 24.942142,
+         "altitude" : 34.9090909090909
+      },
+      {
+         "longitude" : 121.370198,
+         "timestamp" : 55.6,
+         "type" : "gps",
+         "latitude" : 24.942119,
+         "altitude" : 35.0909090909091
+      },
+      {
+         "altitude" : 35.2727272727273,
+         "latitude" : 24.942086,
+         "longitude" : 121.370083,
+         "timestamp" : 59.633,
+         "type" : "gps"
+      },
+      {
+         "latitude" : 24.942036,
+         "longitude" : 121.369975,
+         "type" : "gps",
+         "timestamp" : 63.817,
+         "altitude" : 35.4545454545455
+      },
+      {
+         "longitude" : 121.369893,
+         "timestamp" : 71.816,
+         "type" : "gps",
+         "latitude" : 24.941976,
+         "altitude" : 35.7272727272727
+      },
+      {
+         "latitude" : 24.941921,
+         "type" : "gps",
+         "timestamp" : 75.603,
+         "longitude" : 121.369793,
+         "altitude" : 36
+      },
+      {
+         "latitude" : 24.941862,
+         "longitude" : 121.369684,
+         "timestamp" : 80.58,
+         "type" : "gps",
+         "altitude" : 36.2727272727273
+      },
+      {
+         "latitude" : 24.941795,
+         "type" : "gps",
+         "timestamp" : 84.607,
+         "longitude" : 121.369604,
+         "altitude" : 36.8181818181818
+      },
+      {
+         "type" : "gps",
+         "timestamp" : 88.545,
+         "longitude" : 121.369517,
+         "latitude" : 24.941741,
+         "altitude" : 37.3636363636364
+      },
+      {
+         "altitude" : 37.9090909090909,
+         "type" : "gps",
+         "timestamp" : 94.584,
+         "longitude" : 121.369429,
+         "latitude" : 24.941687
+      },
+      {
+         "longitude" : 121.369327,
+         "type" : "gps",
+         "timestamp" : 99.616,
+         "latitude" : 24.941637,
+         "altitude" : 38.5454545454545
+      },
+      {
+         "timestamp" : 104.651,
+         "type" : "gps",
+         "longitude" : 121.369228,
+         "latitude" : 24.941616,
+         "altitude" : 39.1818181818182
+      },
+      {
+         "altitude" : 39.2,
+         "timestamp" : 109.71,
+         "type" : "gps",
+         "longitude" : 121.369122,
+         "latitude" : 24.941591
+      },
+      {
+         "altitude" : 39.2222222222222,
+         "type" : "gps",
+         "timestamp" : 114.648,
+         "longitude" : 121.36904,
+         "latitude" : 24.941527
+      },
+      {
+         "altitude" : 39.25,
+         "longitude" : 121.368943,
+         "timestamp" : 118.835,
+         "type" : "gps",
+         "latitude" : 24.941464
+      },
+      {
+         "altitude" : 39.2857142857143,
+         "timestamp" : 122.563,
+         "type" : "gps",
+         "longitude" : 121.368843,
+         "latitude" : 24.941416
+      },
+      {
+         "longitude" : 121.368841,
+         "timestamp" : 123.774,
+         "type" : "pause",
+         "latitude" : 24.941402,
+         "altitude" : 39.3333333333333
+      },
+      {
+         "latitude" : 24.940829,
+         "timestamp" : 213.247,
+         "type" : "resume",
+         "longitude" : 121.368134,
+         "altitude" : 38
+      },
+      {
+         "altitude" : 38,
+         "latitude" : 24.940829,
+         "longitude" : 121.368134,
+         "type" : "end",
+         "timestamp" : 213.247
+      }
+   ],
+   "share" : "Everyone",
+   "share_map" : "Friends",
+   "nearest_teammate_general_measurements" : [],
+   "nearest_teammate_weight" : [],
+   "nearest_weight" : "/weight/206328316",
+   "comments" : "/fitnessActivities/318671963/comments",
+   "entry_mode" : "API",
+   "nearest_teammate_fitness_activities" : [],
+   "nearest_teammate_diabetes" : [],
+   "climb" : 4.42424242424243,
+   "heart_rate" : [],
+   "uri" : "/fitnessActivities/318671963",
+   "nearest_teammate_background_activities" : [],
+   "userID" : 24207205,
+   "total_distance" : 300.574770974922,
+   "nearest_teammate_nutrition" : [],
+   "is_live" : false,
+   "equipment" : "None",
+   "nearest_teammate_sleep" : [],
+   "activity" : "http://runkeeper.com/user/1122458230/activity/318671963",
+   "total_calories" : 22,
+   "images" : [],
+   "source" : "RunKeeper",
+   "type" : "Running",
+   "calories" : [],
+   "nearest_teammate_strength_training_activities" : [],
+   "duration" : 123.774
+}

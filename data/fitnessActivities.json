@@ -1,0 +1,16 @@
+{
+   "items" : [
+      {
+         "uri" : "/fitnessActivities/318671963",
+         "total_distance" : 300.574770974922,
+         "type" : "Running",
+         "source" : "RunKeeper",
+         "has_path" : true,
+         "entry_mode" : "API",
+         "start_time" : "Sat, 15 Mar 2014 21:33:16",
+         "total_calories" : 22,
+         "duration" : 123.774
+      }
+   ],
+   "size" : 1
+}
