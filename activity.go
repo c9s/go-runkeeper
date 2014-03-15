@@ -1,6 +1,6 @@
 package runkeeper
 
-import "time"
+// import "time"
 
 /*
 {
@@ -71,15 +71,15 @@ type FitnessActivityFeed struct {
 	}
 */
 type FitnessActivity struct {
-	Type          string    `json:"type"`
-	StartTime     time.Time `json:"start_time"`
-	TotalDistance float64   `json:"total_distance"`
-	Duration      float64   `json:"duration"`
-	Source        string    `json:"source"`
-	HasMap        string    `json:"has_map"`
-	HasPath       string    `json:"has_path"`
-	EntryMode     string    `json:"entry_mode"`
-	Uri           string    `json:"uri"`
+	Type          string  `json:"type"`
+	StartTime     string  `json:"start_time"`
+	TotalDistance float64 `json:"total_distance"`
+	Duration      float64 `json:"duration"`
+	Source        string  `json:"source"`
+	HasMap        bool    `json:"has_map"`
+	HasPath       bool    `json:"has_path"`
+	EntryMode     string  `json:"entry_mode"`
+	Uri           string  `json:"uri"`
 
 	// Details
 	Climb         float64 `json:"climb"`
@@ -87,7 +87,7 @@ type FitnessActivity struct {
 	UserID        int64   `json:"userID"`         // "userID" : 24207205,
 	IsLive        bool    `json:"is_live"`        // "is_live" : false,
 	Equipment     string  `json:"equipment"`      // "equipment" : "None",
-	TotalCalories int64   `json:"total_calories"` // "total_calories" : 22,
+	TotalCalories float64 `json:"total_calories"` // "total_calories" : 22,
 
 	Share    string `json:"share"`     // "share" : "Everyone",
 	ShareMap string `json:"share_map"` // "share_map" : "Friends",
@@ -115,7 +115,7 @@ type Path struct {
 	Longitude float64 `json:"longitude"` // 121.37
 	Type      string  `json:"type"`      // gps
 	Latitude  float64 `json:"latitude"`
-	Timestamp int64   `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 }
 
 /*

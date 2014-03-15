@@ -111,9 +111,9 @@ func (self *Client) GetFitnessActivityFeed(userParams *Params) (*FitnessActivity
 	return &activities, nil
 }
 
-func (self *Client) GetFitnessActivity(activity FitnessActivity, userParams *Params) (*FitnessActivity, error) {
+func (self *Client) GetFitnessActivity(activityUri string, userParams *Params) (*FitnessActivity, error) {
 	params := self.GetRequestParams(userParams)
-	req, err := self.createBaseRequest("GET", activity.Uri+"?"+params.Encode(), ContentTypeFitnessActivity, nil)
+	req, err := self.createBaseRequest("GET", activityUri+"?"+params.Encode(), ContentTypeFitnessActivity, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -123,6 +123,8 @@ func (self *Client) GetFitnessActivity(activity FitnessActivity, userParams *Par
 		return nil, err
 	}
 	defer resp.Body.Close()
+
+	var activity = FitnessActivity{}
 
 	// re-fill the details
 	if err := parseJsonResponse(resp, &activity); err != nil {

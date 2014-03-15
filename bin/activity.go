@@ -1,11 +1,5 @@
-Nike+ API for Go
-----------------
+package main
 
-```sh
-go run -x bin/activity.go {access token}
-```
-
-```go
 import runkeeper "github.com/c9s/go-runkeeper"
 import "log"
 import "flag"
@@ -15,7 +9,7 @@ func main() {
 
 	args := flag.Args()
 
-	client := runkeeper.NewClient(args[0]) // pass access token
+	client := runkeeper.NewClient(args[0])
 	activities, err := client.GetFitnessActivityFeed(nil)
 	if err != nil {
 		log.Fatal(err)
@@ -31,5 +25,3 @@ func main() {
 		log.Println(activityDetails)
 	}
 }
-```
-
