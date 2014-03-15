@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
+	"strconv"
 	"strings"
 )
 
@@ -28,6 +29,12 @@ func NewClient(accessToken string) *Client {
 
 var baseUrl string = "https://api.nike.com"
 
+type ErrorResult struct {
+	Result       string `json:"result"`
+	ErrorCode    string `json:"errorCode"`
+	ErrorMessage string `json:"errorMessage"`
+}
+
 /**
 result should be a struct pointer
 */
@@ -36,7 +43,13 @@ func parseJsonResponse(resp *http.Response, result interface{}) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	if bytes.Contains(body, []byte("errorCode")) {
+		result := ErrorResult{}
+		if err := json.Unmarshal(body, &result); err != nil {
+			return err
+		}
+		return errors.New(result.ErrorMessage)
+	}
 	return json.Unmarshal(body, result)
 }
 
@@ -106,24 +119,63 @@ func (self *Client) GetActivityDetails(activityId string) (*Activity, error) {
 		return nil, err
 	}
 	var activity = Activity{}
+	defer resp.Body.Close()
 	if err := parseJsonResponse(resp, &activity); err != nil {
 		return nil, err
 	}
 	return &activity, nil
 }
 
-func (self *Client) GetActivities() (*Activities, error) {
-	url := fmt.Sprintf("%s/me/sport/activities?access_token=%s", baseUrl, self.AccessToken)
-	req, err := http.NewRequest("GET", url, nil)
-	req.Header.Add("Accept", "application/json")
-	resp, err := self.Do(req)
+type Params map[string]interface{}
 
+func (self *Client) GetRequestParams(userParams *Params) url.Values {
+	params := url.Values{"access_token": {self.AccessToken}}
+	if userParams != nil {
+		for key, val := range *userParams {
+			switch t := val.(type) {
+			case int, int8, int16, int32, int64:
+				params.Set(key, strconv.Itoa(t.(int)))
+			case string:
+				params.Set(key, t)
+			case []byte:
+				params.Set(key, string(t))
+			default:
+				params.Set(key, t.(string))
+			}
+		}
+	}
+	return params
+}
+
+func (self *Client) getActivitiesFromRequest(req *http.Request) (*Activities, error) {
+	resp, err := self.Do(req)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 	var activities = Activities{}
 	if err := parseJsonResponse(resp, &activities); err != nil {
 		return nil, err
 	}
 	return &activities, nil
+}
+
+func (self *Client) GetActivities(userParams *Params) (*Activities, error) {
+	params := self.GetRequestParams(userParams)
+	req, err := http.NewRequest("GET", baseUrl+"/me/sport/activities?"+params.Encode(), nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Accept", "application/json")
+	return self.getActivitiesFromRequest(req)
+}
+
+func (self *Client) GetActivitiesByType(actType string, userParams *Params) (*Activities, error) {
+	params := self.GetRequestParams(userParams)
+	req, err := http.NewRequest("GET", baseUrl+"/me/sport/activities/"+actType+"?"+params.Encode(), nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Accept", "application/json")
+	return self.getActivitiesFromRequest(req)
 }
