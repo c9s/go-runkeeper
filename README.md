@@ -1,5 +1,5 @@
-Nike+ API for Go
-----------------
+RunKeeper API for Go
+---------------------
 
 ```sh
 go run -x bin/activity.go {access token}
