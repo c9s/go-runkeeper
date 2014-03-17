@@ -1,6 +1,6 @@
 package runkeeper
 
-// import "time"
+import "time"
 
 /*
 {
@@ -72,7 +72,7 @@ type FitnessActivityFeed struct {
 */
 type FitnessActivity struct {
 	Type          string  `json:"type"`
-	StartTime     string  `json:"start_time"`
+	StartTime     Time    `json:"start_time"`
 	TotalDistance float64 `json:"total_distance"`
 	Duration      float64 `json:"duration"`
 	Source        string  `json:"source"`
@@ -118,19 +118,23 @@ type Path struct {
 	Timestamp float64 `json:"timestamp"`
 }
 
-/*
-func (self *TimeZone) UnmarshalJSON(data []byte) (err error) {
-	// Fractional seconds are handled implicitly by Parse.
-	loc, err := time.LoadLocation(string(data[1 : len(data)-1]))
-	if err != nil {
-		return err
-	}
-	if loc != nil {
-		*self = TimeZone(*loc)
+type Time time.Time
+
+// Unmarshal "Tue, 1 Mar 2011 07:00:00"
+func (self *Time) UnmarshalJSON(data []byte) (err error) {
+	if len(data) > 1 && data[0] == '"' && data[len(data)-1] == '"' {
+		loc, _ := time.LoadLocation("Local")
+		t, err := time.ParseInLocation("Mon, _2 Jan 2006 15:04:05", string(data[1:len(data)-1]), loc)
+		if err != nil {
+			return err
+		}
+		*self = Time(t)
 	}
 	return nil
 }
-*/
+
+/*
+ */
 
 /*
 func (self *MetricValue) UnmarshalJSON(data []byte) error {
